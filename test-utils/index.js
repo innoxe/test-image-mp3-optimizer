@@ -4,6 +4,9 @@ const { getMimeTypeFromBuffer, getBitRateMp3 } = require("../modules/utils");
 // Asynchronously retrieve the buffer from Firebase storage based on the provided file path
 exports.retrieveBufferFromFirebaseStorage = async (filePath) => {
   const firebaseStorage = new FirebaseStorageUtils(filePath);
+
+  // Wait for the file to be initialized
+  await firebaseStorage.initializeFile();
   // Obtain metadata information (if needed) and log it
   const metadata = await firebaseStorage.getMetaData();
   console.log("Metadata obtained:", metadata);

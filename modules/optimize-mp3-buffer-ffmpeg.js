@@ -6,6 +6,9 @@ const ffmpeg = require("fluent-ffmpeg");
 ffmpeg.setFfmpegPath(ffmpegPath);
 
 const ffmpegOptimizeMp3Buffer = async (inputBuffer, newBitrate = 16) => {
+  if (!Buffer.isBuffer(inputBuffer)) {
+    throw new Error("The input parameter must be a buffer.");
+  }
   const bitrate = await getBitRateMp3(inputBuffer);
   if (bitrate && bitrate < newBitrate) return inputBuffer;
 
@@ -32,7 +35,6 @@ const ffmpegOptimizeMp3Buffer = async (inputBuffer, newBitrate = 16) => {
     });
 
     fs.writeFile(inputFile.path, inputBuffer, (err) => {
-      //if (err) throw err;
       if (err) {
         reject(err);
         inputFile.cleanup();

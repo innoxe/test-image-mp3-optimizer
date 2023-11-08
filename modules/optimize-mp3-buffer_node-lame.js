@@ -4,6 +4,9 @@ const fs = require("fs");
 const { getBitRateMp3 } = require("./utils");
 
 const nodeLameOptimizeMp3Buffer = async (inputBuffer, bitrateTarget = 192) => {
+  if (!Buffer.isBuffer(inputBuffer)) {
+    throw new Error("The input parameter must be a buffer.");
+  }
   const bitrate = await getBitRateMp3(inputBuffer);
   if (bitrate && bitrate < bitrateTarget) return inputBuffer;
   return new Promise((resolve, reject) => {
