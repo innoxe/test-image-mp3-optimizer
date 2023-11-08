@@ -2,14 +2,14 @@ const admin = require("firebase-admin");
 const { Storage } = require("@google-cloud/storage");
 
 // Configure Firebase Admin
-const serviceAccount = require("./firebase-credentials.json"); // Specifica il tuo Service Account Key
+const serviceAccount = require("./firebase-credentials.json"); // Specify your Service Account Key
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
 // Configure firebase storage
 const gcs = new Storage();
-const bucket = gcs.bucket("function-test-14ab6.appspot.com"); // Specifica il nome del tuo bucket
+const bucket = gcs.bucket("function-test-14ab6.appspot.com"); // Specify the name of your bucket
 
 class FirebaseStorageClass {
   constructor(pathFile) {
@@ -19,7 +19,6 @@ class FirebaseStorageClass {
 
   async getMetaData() {
     try {
-      //const file = bucket.file(this.pathFile);
       const [metadata] = await this.file.getMetadata();
       return metadata;
     } catch (error) {
