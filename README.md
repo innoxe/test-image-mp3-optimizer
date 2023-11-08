@@ -1,4 +1,4 @@
-````markdown
+
 # Optimize Image & MP3
 
 ## Description
@@ -26,7 +26,7 @@ const mp3FilePath =
 mainTest(mp3FilePath, 1); // Test MP3 optimization using FFMPEG
 //mainTest(imageFilePath); // Test image optimization
 ```
-````
+
 
 ## Installation of Libraries
 
